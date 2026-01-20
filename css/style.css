@@ -47,7 +47,7 @@ nav a:hover {
     rgba(0,0,0,0.45),
     rgba(0,0,0,0.45)
   ),
-  url("kereta.jpg");
+  url("../src/foto.jpg");
   background-size: cover;
   background-position: center;
   border-radius: 20px;

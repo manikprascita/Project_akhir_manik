@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Riwayat | KAI Express</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    /* NAVBAR */
+    header {
+      background: #0d47a1;
+      padding: 16px 40px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h2 {
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    nav a:hover,
+    nav a.active {
+      opacity: 1;
+      border-bottom: 2px solid #ffc107;
+      padding-bottom: 4px;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #0d47a1;
+    }
+
+    /* CARD */
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background: #fafafa;
+      position: relative;
+    }
+
+    .card h3 {
+      margin: 0;
+      color: #1976d2;
+    }
+
+    .card p {
+      margin: 6px 0;
+      font-size: 14px;
+    }
+
+    .badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .ekonomi { background: #43a047; }
+    .bisnis { background: #fb8c00; }
+    .eksekutif { background: #8e24aa; }
+
+    .empty {
+      text-align: center;
+      color: #777;
+      font-size: 16px;
+      padding: 40px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      background: #e53935;
+      color: white;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    button:hover {
+      background: #c62828;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <h2>KAI Express</h2>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="pesan-tiket.html">Pesan Tiket</a>
+      <a href="jadwal-kereta.html">Jadwal</a>
+      <a href="pembayaran.html" class="active">Pembayaran</a>
+      <a href="riwayat.html">Riwayat</a>
+      <a href="tentang-kami.html">Tentang Kami</a>
+    </nav>
+  </header>
+
+  <!-- CONTENT -->
+  <div class="container">
+    <h1>Riwayat Pemesanan Tiket</h1>
+
+    <div id="riwayat"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 KAI Express. All Rights Reserved.
+  </footer>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem("riwayat")) || [];
+    const container = document.getElementById("riwayat");
+
+    if (data.length === 0) {
+      container.innerHTML = "<p class='empty'>Belum ada riwayat pemesanan.</p>";
+    } else {
+      container.innerHTML = data.map((tiket, index) => `
+        <div class="card">
+          <span class="badge ${tiket.kelas.toLowerCase()}">${tiket.kelas}</span>
+          <h3>${tiket.asal} → ${tiket.tujuan}</h3>
+          <p><strong>Tanggal:</strong> ${tiket.tanggal}</p>
+          <p><strong>Jumlah Penumpang:</strong> ${tiket.jumlah}</p>
+          <button onclick="hapus(${index})">Hapus</button>
+        </div>
+      `).join("");
+    }
+
+    function hapus(index) {
+      data.splice(index, 1);
+      localStorage.setItem("riwayat", JSON.stringify(data));
+      location.reload();
+    }
+  </script>
+
+</body>
+</html>

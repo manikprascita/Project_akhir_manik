@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pesan Tiket | KAI Express</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #f5f7fa, #e4ecf7);
+      color: #333;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      background: #0d47a1;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      opacity: 0.85;
+    }
+
+    nav a:hover,
+    nav a.active {
+      opacity: 1;
+      border-bottom: 2px solid #ffc107;
+      padding-bottom: 4px;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 520px;
+      margin: 50px auto;
+      background: white;
+      padding: 30px 35px;
+      border-radius: 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 5px;
+      color: #0d47a1;
+    }
+
+    p {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    /* FORM */
+    .form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .form input,
+    .form select {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .form input:focus,
+    .form select:focus {
+      border-color: #0d47a1;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(13,71,161,0.15);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      border: none;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(13,71,161,0.3);
+    }
+
+    /* NOTIF */
+    .notif {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      color: green;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+      }
+
+      .navbar {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">KAI Express</div>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="pesan-tiket.html" class="active">Pesan Tiket</a>
+      <a href="jadwal-kereta.html">Jadwal Kereta</a>
+      <a href="pembayaran.html">Pembayaran</a>
+      <a href="riwayat.html">Riwayat</a>
+    </nav>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="container">
+    <h1>Pesan Tiket Kereta</h1>
+    <p>Isi data perjalanan Anda dengan benar</p>
+
+    <form id="form-tiket" class="form">
+      <label>Stasiun Asal</label>
+      <input type="text" id="asal" placeholder="Contoh: Jakarta" required>
+
+      <label>Stasiun Tujuan</label>
+      <input type="text" id="tujuan" placeholder="Contoh: Surabaya" required>
+
+      <label>Tanggal Berangkat</label>
+      <input type="date" id="tanggal" required>
+
+      <label>Kelas Kereta</label>
+      <select id="kelas">
+        <option>Ekonomi</option>
+        <option>Bisnis</option>
+        <option>Eksekutif</option>
+      </select>
+
+      <label>Jumlah Penumpang</label>
+      <input type="number" id="jumlah" min="1" value="1">
+
+      <button type="submit">Pesan Tiket</button>
+    </form>
+
+    <p id="notif" class="notif"></p>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 KAI Express. All Rights Reserved.
+  </footer>
+
+  <script>
+    const form = document.getElementById("form-tiket");
+    const notif = document.getElementById("notif");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const tiket = {
+        asal: document.getElementById("asal").value,
+        tujuan: document.getElementById("tujuan").value,
+        tanggal: document.getElementById("tanggal").value,
+        kelas: document.getElementById("kelas").value,
+        jumlah: document.getElementById("jumlah").value
+      };
+
+      const riwayat = JSON.parse(localStorage.getItem("riwayat")) || [];
+      riwayat.push(tiket);
+      localStorage.setItem("riwayat", JSON.stringify(riwayat));
+
+      notif.innerText = "✅ Tiket berhasil dipesan!";
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>

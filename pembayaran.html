@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pembayaran | KAI Express</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #eef2f7, #dfe7f2);
+      color: #333;
+    }
+
+    /* NAVBAR */
+    header {
+      background: #0d47a1;
+      padding: 16px 40px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h2 {
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    nav a:hover,
+    nav a.active {
+      opacity: 1;
+      border-bottom: 2px solid #ffc107;
+      padding-bottom: 4px;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #0d47a1;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+    }
+
+    /* FORM */
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #0d47a1;
+      box-shadow: 0 0 0 3px rgba(13,71,161,0.15);
+    }
+
+    /* PAYMENT METHOD */
+    .method {
+      border: 1px solid #ddd;
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .method input {
+      width: auto;
+      margin: 0;
+    }
+
+    .method:hover {
+      background: #f1f6ff;
+    }
+
+    /* SUMMARY */
+    .summary {
+      background: #f5f8ff;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .summary h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #0d47a1;
+    }
+
+    .summary p {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .summary hr {
+      margin: 15px 0;
+    }
+
+    .total {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      border: none;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(13,71,161,0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <h2>KAI Express</h2>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="pesan-tiket.html">Pesan Tiket</a>
+      <a href="jadwal-kereta.html">Jadwal</a>
+      <a href="pembayaran.html" class="active">Pembayaran</a>
+      <a href="riwayat.html">Riwayat</a>
+      <a href="tentang-kami.html">Tentang Kami</a>
+    </nav>
+  </header>
+  <!-- CONTENT -->
+  <div class="container">
+    <h1>Pembayaran Tiket</h1>
+
+    <div class="grid">
+      <!-- FORM PEMBAYARAN -->
+      <div>
+        <h3>Metode Pembayaran</h3>
+
+        <label class="method">
+          <input type="radio" name="metode" checked>
+          Transfer Bank
+        </label>
+
+        <label class="method">
+          <input type="radio" name="metode">
+          E-Wallet
+        </label>
+
+        <label class="method">
+          <input type="radio" name="metode">
+          QRIS
+        </label>
+
+        <label class="method">
+          <input type="radio" name="metode">
+          Kartu Kredit
+        </label>
+
+        <button onclick="bayar()">Bayar Sekarang</button>
+      </div>
+
+      <!-- RINGKASAN -->
+      <div class="summary">
+        <h3>Ringkasan Pembayaran</h3>
+
+        <p>
+          <span>Harga Tiket</span>
+          <span>Rp 150.000</span>
+        </p>
+        <p>
+          <span>Biaya Admin</span>
+          <span>Rp 5.000</span>
+        </p>
+
+        <hr>
+
+        <p class="total">
+          <span>Total</span>
+          <span>Rp 155.000</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 KAI Express. All Rights Reserved.
+  </footer>
+
+  <script>
+    function bayar() {
+      alert("Pembayaran berhasil!\nTiket Anda telah aktif.");
+      window.location.href = "riwayat.html";
+    }
+  </script>
+
+</body>
+</html>
