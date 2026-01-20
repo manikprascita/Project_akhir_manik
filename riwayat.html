@@ -6,134 +6,194 @@
   <title>Riwayat | KAI Express</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, sans-serif;
-    }
+  * {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+  }
 
-    body {
-      margin: 0;
-      background: #f4f6f9;
-      color: #333;
-    }
+  body {
+    margin: 0;
+    background: #f4f6f9;
+    color: #333;
+  }
 
-    /* NAVBAR */
+  /* NAVBAR */
+  header {
+    background: #0d47a1;
+    padding: 16px 40px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  header h2 {
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    opacity: 0.9;
+    font-size: 14px;
+  }
+
+  nav a:hover,
+  nav a.active {
+    opacity: 1;
+    border-bottom: 2px solid #ffc107;
+    padding-bottom: 4px;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0d47a1;
+  }
+
+  /* CARD */
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #fafafa;
+    position: relative;
+  }
+
+  .card h3 {
+    margin: 0 0 8px;
+    color: #1976d2;
+    font-size: 18px;
+  }
+
+  .card p {
+    margin: 6px 0;
+    font-size: 14px;
+  }
+
+  .badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .ekonomi { background: #43a047; }
+  .bisnis { background: #fb8c00; }
+  .eksekutif { background: #8e24aa; }
+
+  .empty {
+    text-align: center;
+    color: #777;
+    font-size: 16px;
+    padding: 40px;
+  }
+
+  button {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    background: #e53935;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  button:hover {
+    background: #c62828;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+    font-size: 13px;
+  }
+
+  /* 📱 RESPONSIVE TABLET */
+  @media (max-width: 768px) {
     header {
-      background: #0d47a1;
-      padding: 16px 40px;
-      color: white;
-      display: flex;
+      padding: 15px 20px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    nav {
+      width: 100%;
       justify-content: space-between;
-      align-items: center;
     }
 
-    header h2 {
-      margin: 0;
-      letter-spacing: 1px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: 500;
-      opacity: 0.9;
-    }
-
-    nav a:hover,
-    nav a.active {
-      opacity: 1;
-      border-bottom: 2px solid #ffc107;
-      padding-bottom: 4px;
-    }
-
-    /* CONTAINER */
     .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      margin: 20px;
+      padding: 24px;
     }
 
     h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #0d47a1;
+      font-size: 22px;
+    }
+  }
+
+  /* 📱 RESPONSIVE MOBILE */
+  @media (max-width: 480px) {
+    nav {
+      flex-direction: column;
+      gap: 10px;
     }
 
-    /* CARD */
+    nav a {
+      font-size: 13px;
+    }
+
     .card {
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      background: #fafafa;
-      position: relative;
-    }
-
-    .card h3 {
-      margin: 0;
-      color: #1976d2;
-    }
-
-    .card p {
-      margin: 6px 0;
-      font-size: 14px;
+      padding: 16px;
     }
 
     .badge {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      color: white;
+      position: static;
+      display: inline-block;
+      margin-bottom: 10px;
     }
 
-    .ekonomi { background: #43a047; }
-    .bisnis { background: #fb8c00; }
-    .eksekutif { background: #8e24aa; }
-
-    .empty {
-      text-align: center;
-      color: #777;
+    .card h3 {
       font-size: 16px;
-      padding: 40px;
+    }
+
+    .card p {
+      font-size: 13px;
     }
 
     button {
-      margin-top: 10px;
-      padding: 10px 14px;
-      border: none;
-      border-radius: 8px;
-      background: #e53935;
-      color: white;
-      cursor: pointer;
-      font-size: 13px;
+      width: 100%;
     }
+  }
+</style>
 
-    button:hover {
-      background: #c62828;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #777;
-      font-size: 13px;
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        gap: 10px;
-      }
-    }
-  </style>
 </head>
 <body>
 
